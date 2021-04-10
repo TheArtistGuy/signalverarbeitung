@@ -1,4 +1,4 @@
-
+use crate::bild::{HSV, RGB};
 
 pub fn pixel_rgb_to_greyscale(rgb : &RGB) -> u8 {
     (rgb.red as f32 * 0.3 + rgb.green as f32 * 0.59 + rgb.blue as f32 * 0.11) as u8
@@ -105,18 +105,6 @@ fn get_greatest_rgb(elements : [&f32; 3]) -> &f32 {
         }
     }
     max
-}
-
-pub struct RGB {
-    red : u8,
-    green : u8,
-    blue : u8
-}
-
-pub struct HSV {
-    hue : u32,
-    saturation : f32,
-    value : f32
 }
 
 
