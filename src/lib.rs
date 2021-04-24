@@ -4,6 +4,7 @@ mod statistik;
 mod bildbearbeitungs_kernels;
 mod vektor_operationen;
 mod bild;
+mod fourier;
 
 
 #[cfg(test)]
