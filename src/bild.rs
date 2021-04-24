@@ -36,6 +36,20 @@ impl Bild_8Bit{
         }
     }
 
+    pub fn get_element(&self, elem : usize) -> Option<&RGB> {
+        if  elem > self.breite * self.hoehe || elem < 0{
+            return None
+        }
+        Some(&self.pixel[elem])
+    }
+
+    pub fn set_element(&mut self, elem: usize, wert : &RGB) {
+        if  elem > self.breite * self.hoehe || elem < 0 {
+            panic!()
+        }
+        self.pixel[elem] = wert.clone();
+    }
+
     ///Konvertiert das Bild in Grauwerte
     pub fn to_greyscale(&self) -> Bild_Grauwerte{
         let mut bild = Bild_Grauwerte::new(self.hoehe, self.breite);
@@ -47,6 +61,54 @@ impl Bild_8Bit{
         bild
     }
 
+    pub fn erstelle_teilbild(&self, x_anfang : usize, x_ende : usize, y_anfang : usize, y_ende : usize) -> Option<Bild_8Bit>{
+        if x_ende > self.hoehe || y_ende > self.breite{
+            return None
+        }
+        let mut teilbild = Bild_8Bit::new(&x_ende - &x_anfang, &y_ende - &y_anfang);
+        for x in x_anfang..x_ende{
+            for y in y_anfang..y_ende{
+                let x_neues_bild = x-x_anfang;
+                let y_neues_bild = y-y_anfang;
+
+                teilbild.set_pixel(x_neues_bild, y_neues_bild, match self.get_pixel(x,y) {
+                    Some(c) => c.clone(),
+                    _ => panic!()
+                        /*RGB{
+                        red: 0,
+                        green: 0,
+                        blue: 0
+                    }*/
+                });
+            }
+        }
+        Some(teilbild)
+    }
+    /*
+    TODO : implementation für intensitätswerte
+
+
+    pub fn erstelle_integral_image(&self, x_anfang : usize, x_ende : usize, y_anfang : usize, y_ende : usize) -> Option<Bild_8Bit> {
+        let teilbild = self.erstelle_teilbild(x_anfang, x_ende, y_anfang, y_ende);
+        match teilbild {
+            Some(f) => {
+                let mut integral_image = Bild_8Bit::new(f.hoehe, f.breite);
+                integral_image.set_element(0, (f.get_element(0).unwrap()).clone);
+
+                for y in 1..integral_image.breite {
+                    let mut sum_of_row = 0;
+                    for x in 1..integral_image.hoehe {
+                        sum_of_row = sum_of_row + f.get_element(x*f.hoehe+y).unwrap();
+                        integral_image.set_element(x*f.hoehe+y, integral_image.get_element(x-1*f.breite + y).unwrap() + sum_of_row);
+                    }
+                }
+
+                Some(integral_image)
+                },
+            _ => None
+        }
+    }
+    */
 }
 
 
