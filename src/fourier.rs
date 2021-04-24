@@ -8,14 +8,14 @@ pub fn berechne_reellwertige_DFT(signal : &[f32]) -> ReellwertigeDFT {
         let realteil =   {
             let mut r = 0.0;
             for (n, wert) in signal.iter().enumerate(){
-                r = r  + (wert* f32::cos(2.0* std::f32::consts::PI * (k*n) as f32 / signal.len() as f32));
+                r = r  + (wert* f32::cos(2.0* PI * (k*n) as f32 / signal.len() as f32));
             }
             r
         };
         let imaginaerteil =   {
             let mut i = 0.0;
             for (n, wert) in signal.iter().enumerate(){
-                i = i + (wert* f32::cos(2.0* PI * (k*n) as f32 / signal.len() as f32));
+                i = i + (wert* f32::sin(2.0* PI * (k*n) as f32 / signal.len() as f32));
             }
             i
         };
