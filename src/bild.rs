@@ -1,15 +1,15 @@
 use crate::color_conversion::pixel_rgb_to_greyscale;
 
-pub struct Bild_8Bit {
+pub struct Bild8Bit {
     pixel : Vec<RGB>,
     pub hoehe : usize,
     pub breite : usize,
 }
 
-impl Bild_8Bit{
+impl Bild8Bit {
     ///initialisiert ein neues Bild mit nur weißen Pixeln
     pub fn new(hoehe : usize, breite : usize) -> Self{
-        Bild_8Bit{
+        Bild8Bit {
             pixel: vec![RGB {
                 red: 255,
                 green: 255,
@@ -22,7 +22,7 @@ impl Bild_8Bit{
 
     ///Gibt den Wert eines Pixels zurück, anders als Mathematiker nutzen wir Höhe x Breite
     pub fn get_pixel(&self, x : usize, y : usize) -> Option<&RGB>{
-        if (x > self.hoehe || y > self.breite){
+        if x > self.hoehe || y > self.breite{
             None
         } else {
             Some(&self.pixel[x + self.breite*x])
@@ -51,8 +51,8 @@ impl Bild_8Bit{
     }
 
     ///Konvertiert das Bild in Grauwerte
-    pub fn to_greyscale(&self) -> Bild_Grauwerte{
-        let mut bild = Bild_Grauwerte::new(self.hoehe, self.breite);
+    pub fn to_greyscale(&self) -> BildGrauwerte {
+        let mut bild = BildGrauwerte::new(self.hoehe, self.breite);
         for x in 0..self.hoehe{
             for y in 0..self.breite{
                 bild.set_pixel(x,y, pixel_rgb_to_greyscale(self.get_pixel(x,y).unwrap()))
@@ -61,11 +61,11 @@ impl Bild_8Bit{
         bild
     }
 
-    pub fn erstelle_teilbild(&self, x_anfang : usize, x_ende : usize, y_anfang : usize, y_ende : usize) -> Option<Bild_8Bit>{
+    pub fn erstelle_teilbild(&self, x_anfang : usize, x_ende : usize, y_anfang : usize, y_ende : usize) -> Option<Bild8Bit>{
         if x_ende > self.hoehe || y_ende > self.breite{
             return None
         }
-        let mut teilbild = Bild_8Bit::new(&x_ende - &x_anfang, &y_ende - &y_anfang);
+        let mut teilbild = Bild8Bit::new(&x_ende - &x_anfang, &y_ende - &y_anfang);
         for x in x_anfang..x_ende{
             for y in y_anfang..y_ende{
                 let x_neues_bild = x-x_anfang;
@@ -112,15 +112,15 @@ impl Bild_8Bit{
 }
 
 
-pub struct Bild_Grauwerte{
+pub struct BildGrauwerte {
     pixel : Vec<u8>,
     pub hoehe : usize,
     pub breite : usize
 }
 
-impl Bild_Grauwerte{
+impl BildGrauwerte {
     pub fn new (hoehe : usize, breite : usize) -> Self{
-        Bild_Grauwerte{
+        BildGrauwerte {
             pixel: vec![255; hoehe*breite],
             hoehe,
             breite
