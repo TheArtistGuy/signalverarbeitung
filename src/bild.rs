@@ -84,31 +84,6 @@ impl Bild8Bit {
         }
         Some(teilbild)
     }
-    /*
-    TODO : implementation für intensitätswerte
-
-
-    pub fn erstelle_integral_image(&self, x_anfang : usize, x_ende : usize, y_anfang : usize, y_ende : usize) -> Option<Bild_8Bit> {
-        let teilbild = self.erstelle_teilbild(x_anfang, x_ende, y_anfang, y_ende);
-        match teilbild {
-            Some(f) => {
-                let mut integral_image = Bild_8Bit::new(f.hoehe, f.breite);
-                integral_image.set_element(0, (f.get_element(0).unwrap()).clone);
-
-                for y in 1..integral_image.breite {
-                    let mut sum_of_row = 0;
-                    for x in 1..integral_image.hoehe {
-                        sum_of_row = sum_of_row + f.get_element(x*f.hoehe+y).unwrap();
-                        integral_image.set_element(x*f.hoehe+y, integral_image.get_element(x-1*f.breite + y).unwrap() + sum_of_row);
-                    }
-                }
-
-                Some(integral_image)
-                },
-            _ => None
-        }
-    }
-    */
 }
 
 

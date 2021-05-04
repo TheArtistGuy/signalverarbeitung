@@ -6,6 +6,7 @@ mod vektor_operationen;
 mod bild;
 mod fourier;
 mod bild_intensitaet;
+mod merkmaldetektion;
 
 
 #[cfg(test)]
