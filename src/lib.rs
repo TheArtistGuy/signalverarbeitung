@@ -1,4 +1,3 @@
-mod color_conversion;
 mod signal_effekte;
 mod statistik;
 mod bildbearbeitungs_kernels;
@@ -7,6 +6,7 @@ mod bild;
 mod fourier;
 mod bild_intensitaet;
 mod merkmaldetektion;
+mod pixel;
 
 
 #[cfg(test)]

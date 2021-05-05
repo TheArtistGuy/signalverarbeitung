@@ -1,4 +1,4 @@
-use crate::color_conversion::pixel_rgb_to_greyscale;
+use crate::pixel::RGB;
 
 pub struct Bild8Bit {
     pixel : Vec<RGB>,
@@ -55,7 +55,7 @@ impl Bild8Bit {
         let mut bild = BildGrauwerte::new(self.hoehe, self.breite);
         for x in 0..self.hoehe{
             for y in 0..self.breite{
-                bild.set_pixel(x,y, pixel_rgb_to_greyscale(self.get_pixel(x,y).unwrap()))
+                bild.set_pixel(x,y, self.get_pixel(x,y).unwrap().to_greyscale())
             }
         }
         bild
@@ -117,28 +117,4 @@ impl BildGrauwerte {
             self.pixel[x + self.breite*x] = wert
         }
     }
-}
-
-
-
-pub struct RGB {
-    pub red : u8,
-    pub green : u8,
-    pub blue : u8
-}
-
-impl Clone for RGB{
-    fn clone(&self) -> Self {
-        RGB{
-            red: self.red.clone(),
-            green: self.green.clone(),
-            blue: self.blue.clone()
-        }
-    }
-}
-
-pub struct HSV {
-    pub(crate) hue : u32,
-    pub(crate) saturation : f32,
-    pub(crate) value : f32
 }

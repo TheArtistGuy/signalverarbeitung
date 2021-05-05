@@ -1,5 +1,4 @@
 use crate::bild::{Bild8Bit};
-use crate::color_conversion::pixel_rgb_to_hsv;
 
 pub struct BildIntenstiaet {
     pixel : Vec<f32>,
@@ -37,7 +36,7 @@ impl BildIntenstiaet {
         let mut zellen = Vec::new();
         for i in 0..bild.hoehe{
             for j in 0..bild.breite{
-                let x = pixel_rgb_to_hsv( bild.get_pixel(i,j).unwrap()).saturation;
+                let x = bild.get_pixel(i,j).unwrap().to_hsv().saturation;
                 zellen.push(x);
             }
         }
@@ -49,7 +48,7 @@ impl BildIntenstiaet {
     }
     ///Gibt den Wert eines Pixels zurück, anders als Mathematiker nutzen wir Höhe x Breite
     pub fn get_pixel(&self, x : usize, y : usize) -> Option<&f32>{
-        if (x > self.hoehe || y > self.breite){
+        if x > self.hoehe || y > self.breite{
             None
         } else {
             Some(&self.pixel[x + self.breite*x])
