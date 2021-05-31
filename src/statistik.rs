@@ -41,6 +41,20 @@ fn standardabweichung_geschaetzt(signal :&[f32]) -> f32{
     varianz_geschaetzt(signal).sqrt()
 }
 
+fn median (signal : Box<[f32]>) -> f32{
+    let mut signal_copy = signal.clone();
+    signal_copy.sort_by(|x1,x2| x1.total_cmp(x2));
+    let median = match signal_copy.len() %2 {
+      0 => signal_copy.get(signal.len()/2).unwrap(), //kein +1, da von groß nach klein geordnet
+      _ => signal_copy.get(signal_copy.len()/2).unwrap()
+    };
+    median.clone()
+}
+
+
+
+
+
 
 #[cfg(test)]
 mod tests {
@@ -63,4 +77,28 @@ mod tests {
         let signal: [f32; 3] = [3.0, 1.0, 5.0];
         assert_eq!(varianz(&signal), 8.0 / 3.0);
     }
+
+    #[test]
+    fn test_median_1() {
+        let signal:[f32;5] = [3.2, 5.5,7.2,10.0,4.0];
+        assert_eq!(median(Box::new(signal)), 5.5 as f32);
+    }
+
+    #[test]
+    fn test_median_2(){
+        let signal :[f32;6] = [3.2, 5.5,7.2,10.0,4.0, 12.1];
+        //println!("{}",median(Box::new(signal));
+        assert_eq!(median(Box::new(signal)), 7.2 as f32);
+    }
+/*
+    #[test]
+    fn test_sorting(){
+        let mut x = [1.0, 0.5, 2.0, 0.2];
+        x.sort_by(|x1,x2| {
+            x1.total_cmp(x2)
+        });
+        assert_eq!(x, [0.2,0.5,1.0,2.0]);
+    }
+
+*/
 }
