@@ -90,15 +90,5 @@ mod tests {
         //println!("{}",median(Box::new(signal));
         assert_eq!(median(Box::new(signal)), 7.2 as f32);
     }
-/*
-    #[test]
-    fn test_sorting(){
-        let mut x = [1.0, 0.5, 2.0, 0.2];
-        x.sort_by(|x1,x2| {
-            x1.total_cmp(x2)
-        });
-        assert_eq!(x, [0.2,0.5,1.0,2.0]);
-    }
 
-*/
 }

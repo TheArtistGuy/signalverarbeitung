@@ -9,6 +9,7 @@ mod fourier;
 mod bild_intensitaet;
 mod merkmaldetektion;
 mod pixel;
+mod minimierung;
 
 
 #[cfg(test)]
