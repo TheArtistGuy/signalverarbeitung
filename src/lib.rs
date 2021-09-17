@@ -1,5 +1,3 @@
-#![feature(total_cmp)]
-
 mod signal_effekte;
 mod statistik;
 mod bildbearbeitungs_kernels;
